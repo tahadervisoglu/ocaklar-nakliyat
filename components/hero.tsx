@@ -20,11 +20,11 @@ export function Hero() {
   }
 
   return (
-    <section className="relative bg-gradient-to-b from-white to-[#f5f5f5] py-16 overflow-hidden">
+    <section className="relative bg-gradient-to-b from-white to-[#f5f5f5] py-8 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Left content */}
-          <div className="space-y-6">
+          <div className="space-y-4 pt-4">
             <h1 className="text-4xl lg:text-5xl font-bold text-[#1d3557] leading-tight text-balance">
               Şehirler Arası Nakliyat ihtiyaçlarınıza; <span className="text-[#e63946]">Tam Kurumsal Çözümler</span>
             </h1>
@@ -34,7 +34,7 @@ export function Hero() {
               profesyonelce ve özenle taşıyoruz.
             </p>
 
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-wrap gap-4 pt-2">
               <Button
                 onClick={() => scrollToSection("hizmetlerimiz")}
                 className="bg-[#1d3557] hover:bg-[#1d3557]/90 text-white px-8 py-6 text-base rounded-full"
@@ -53,8 +53,8 @@ export function Hero() {
           </div>
 
           {/* Right image */}
-          <div className="relative">
-            <div className="relative aspect-square max-w-2xl mx-auto rounded-full overflow-hidden shadow-2xl border-8 border-white">
+          <div className="relative mt-4">
+            <div className="relative aspect-square max-w-xl mx-auto rounded-full overflow-hidden shadow-2xl border-8 border-white">
               {/* Decorative circles behind */}
               <div className="absolute -inset-8 bg-gradient-to-br from-[#e63946]/20 to-[#1d3557]/20 rounded-full blur-3xl -z-10" />
 
@@ -73,7 +73,7 @@ export function Hero() {
       </div>
 
       {/* Bottom features section */}
-      <div className="container mx-auto px-4 mt-20">
+      <div className="container mx-auto px-4 mt-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-white rounded-lg p-6 shadow-sm">
             <div className="w-16 h-16 bg-[#e63946]/10 rounded-full flex items-center justify-center mb-4">

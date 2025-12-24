@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   description:
     "Ev eşyası taşımacılık konusunda deneyimli ekibimizle tüm eşyalara özel paketleme uygulayarak profesyonelce ve özenle taşıyoruz.",
   metadataBase: new URL('https://ocaklarnakliyat.com'),
+  verification: {
+    google: 'ef0908edca2bf174',
+  },
   alternates: {
     canonical: '/',
   },

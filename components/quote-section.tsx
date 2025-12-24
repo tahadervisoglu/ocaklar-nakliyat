@@ -5,25 +5,70 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Phone, MapPin, Calendar, Package } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { QuotePopup } from "@/components/quote-popup"
+import { Phone, MapPin } from "lucide-react"
 
 export function QuoteSection() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    email: "",
     fromAddress: "",
     toAddress: "",
-    date: "",
-    message: "",
   })
+
+  const [customFromAddress, setCustomFromAddress] = useState("")
+  const [customToAddress, setCustomToAddress] = useState("")
+  const [showCustomFrom, setShowCustomFrom] = useState(false)
+  const [showCustomTo, setShowCustomTo] = useState(false)
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+
+  const cities = [
+    "İstanbul",
+    "Ankara", 
+    "İzmir",
+    "Bursa",
+    "Antalya",
+    "Adana",
+    "Konya",
+    "Gaziantep",
+    "Kayseri",
+    "Mersin",
+    "Diğer"
+  ]
+
+  const handleFromAddressChange = (value: string) => {
+    if (value === "Diğer") {
+      setShowCustomFrom(true)
+      setFormData({ ...formData, fromAddress: "" })
+    } else {
+      setShowCustomFrom(false)
+      setFormData({ ...formData, fromAddress: value })
+    }
+  }
+
+  const handleToAddressChange = (value: string) => {
+    if (value === "Diğer") {
+      setShowCustomTo(true)
+      setFormData({ ...formData, toAddress: "" })
+    } else {
+      setShowCustomTo(false)
+      setFormData({ ...formData, toAddress: value })
+    }
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Form submission logic here
-    console.log("[v0] Form submitted:", formData)
-    alert("Talebiniz alındı! En kısa sürede sizinle iletişime geçeceğiz.")
+    
+    // Validation
+    if (!formData.name || !formData.phone || !formData.fromAddress || !formData.toAddress) {
+      alert("Lütfen tüm zorunlu alanları doldurunuz.")
+      return
+    }
+    
+    // Show popup
+    setIsPopupOpen(true)
   }
 
   return (
@@ -74,36 +119,40 @@ export function QuoteSection() {
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  E-posta
-                </label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="ornek@email.com"
-                  className="w-full"
-                />
-              </div>
-
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="fromAddress" className="block text-sm font-medium text-gray-700 mb-2">
                     Nereden *
                   </label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <Input
-                      id="fromAddress"
-                      required
-                      value={formData.fromAddress}
-                      onChange={(e) => setFormData({ ...formData, fromAddress: e.target.value })}
-                      placeholder="Taşınacak adres"
-                      className="pl-10 w-full"
-                    />
+                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+                    <Select onValueChange={handleFromAddressChange} required>
+                      <SelectTrigger className="pl-10 w-full">
+                        <SelectValue placeholder="Şehir seçiniz" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {cities.map((city) => (
+                          <SelectItem key={city} value={city}>
+                            {city}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
+                  {showCustomFrom && (
+                    <div className="mt-2">
+                      <Input
+                        placeholder="Şehir adını yazınız"
+                        value={customFromAddress}
+                        onChange={(e) => {
+                          setCustomFromAddress(e.target.value)
+                          setFormData({ ...formData, fromAddress: e.target.value })
+                        }}
+                        className="w-full"
+                        required
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -111,48 +160,34 @@ export function QuoteSection() {
                     Nereye *
                   </label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <Input
-                      id="toAddress"
-                      required
-                      value={formData.toAddress}
-                      onChange={(e) => setFormData({ ...formData, toAddress: e.target.value })}
-                      placeholder="Varış adresi"
-                      className="pl-10 w-full"
-                    />
+                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+                    <Select onValueChange={handleToAddressChange} required>
+                      <SelectTrigger className="pl-10 w-full">
+                        <SelectValue placeholder="Şehir seçiniz" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {cities.map((city) => (
+                          <SelectItem key={city} value={city}>
+                            {city}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-2">
-                  Taşınma Tarihi
-                </label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                  <Input
-                    id="date"
-                    type="date"
-                    value={formData.date}
-                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    className="pl-10 w-full"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Ek Bilgiler
-                </label>
-                <div className="relative">
-                  <Package className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
-                  <Textarea
-                    id="message"
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Taşınacak eşyalar hakkında detaylı bilgi verebilirsiniz..."
-                    className="pl-10 min-h-32 w-full"
-                  />
+                  {showCustomTo && (
+                    <div className="mt-2">
+                      <Input
+                        placeholder="Şehir adını yazınız"
+                        value={customToAddress}
+                        onChange={(e) => {
+                          setCustomToAddress(e.target.value)
+                          setFormData({ ...formData, toAddress: e.target.value })
+                        }}
+                        className="w-full"
+                        required
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -220,6 +255,12 @@ export function QuoteSection() {
           </div>
         </div>
       </div>
+
+      {/* Quote Popup */}
+      <QuotePopup 
+        isOpen={isPopupOpen} 
+        onClose={() => setIsPopupOpen(false)} 
+      />
     </section>
   )
 }

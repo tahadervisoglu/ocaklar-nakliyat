@@ -2,6 +2,7 @@ import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
 import { AboutSection } from "@/components/about-section"
 import { QuoteSection } from "@/components/quote-section"
+import { WhatsAppFloat } from "@/components/whatsapp-float"
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <div id="teklif">
         <QuoteSection />
       </div>
+      <WhatsAppFloat />
     </div>
   )
 }

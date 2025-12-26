@@ -5,9 +5,9 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { CitySelect } from "@/components/city-select"
 import { QuotePopup } from "@/components/quote-popup"
-import { Phone, MapPin } from "lucide-react"
+import { Phone } from "lucide-react"
 
 export function QuoteSection() {
   const [formData, setFormData] = useState({
@@ -17,45 +17,14 @@ export function QuoteSection() {
     toAddress: "",
   })
 
-  const [customFromAddress, setCustomFromAddress] = useState("")
-  const [customToAddress, setCustomToAddress] = useState("")
-  const [showCustomFrom, setShowCustomFrom] = useState(false)
-  const [showCustomTo, setShowCustomTo] = useState(false)
-
   const [isPopupOpen, setIsPopupOpen] = useState(false)
 
-  const cities = [
-    "İstanbul",
-    "Ankara", 
-    "İzmir",
-    "Bursa",
-    "Antalya",
-    "Adana",
-    "Konya",
-    "Gaziantep",
-    "Kayseri",
-    "Mersin",
-    "Diğer"
-  ]
-
   const handleFromAddressChange = (value: string) => {
-    if (value === "Diğer") {
-      setShowCustomFrom(true)
-      setFormData({ ...formData, fromAddress: "" })
-    } else {
-      setShowCustomFrom(false)
-      setFormData({ ...formData, fromAddress: value })
-    }
+    setFormData({ ...formData, fromAddress: value })
   }
 
   const handleToAddressChange = (value: string) => {
-    if (value === "Diğer") {
-      setShowCustomTo(true)
-      setFormData({ ...formData, toAddress: "" })
-    } else {
-      setShowCustomTo(false)
-      setFormData({ ...formData, toAddress: value })
-    }
+    setFormData({ ...formData, toAddress: value })
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -124,70 +93,24 @@ export function QuoteSection() {
                   <label htmlFor="fromAddress" className="block text-sm font-medium text-gray-700 mb-2">
                     Nereden *
                   </label>
-                  <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
-                    <Select onValueChange={handleFromAddressChange} required>
-                      <SelectTrigger className="pl-10 w-full">
-                        <SelectValue placeholder="Şehir seçiniz" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {cities.map((city) => (
-                          <SelectItem key={city} value={city}>
-                            {city}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  {showCustomFrom && (
-                    <div className="mt-2">
-                      <Input
-                        placeholder="Şehir adını yazınız"
-                        value={customFromAddress}
-                        onChange={(e) => {
-                          setCustomFromAddress(e.target.value)
-                          setFormData({ ...formData, fromAddress: e.target.value })
-                        }}
-                        className="w-full"
-                        required
-                      />
-                    </div>
-                  )}
+                  <CitySelect
+                    value={formData.fromAddress}
+                    onChange={handleFromAddressChange}
+                    placeholder="Şehir seçiniz"
+                    required
+                  />
                 </div>
 
                 <div>
                   <label htmlFor="toAddress" className="block text-sm font-medium text-gray-700 mb-2">
                     Nereye *
                   </label>
-                  <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
-                    <Select onValueChange={handleToAddressChange} required>
-                      <SelectTrigger className="pl-10 w-full">
-                        <SelectValue placeholder="Şehir seçiniz" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {cities.map((city) => (
-                          <SelectItem key={city} value={city}>
-                            {city}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  {showCustomTo && (
-                    <div className="mt-2">
-                      <Input
-                        placeholder="Şehir adını yazınız"
-                        value={customToAddress}
-                        onChange={(e) => {
-                          setCustomToAddress(e.target.value)
-                          setFormData({ ...formData, toAddress: e.target.value })
-                        }}
-                        className="w-full"
-                        required
-                      />
-                    </div>
-                  )}
+                  <CitySelect
+                    value={formData.toAddress}
+                    onChange={handleToAddressChange}
+                    placeholder="Şehir seçiniz"
+                    required
+                  />
                 </div>
               </div>
 

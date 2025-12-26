@@ -1,9 +1,12 @@
 "use client"
 
-import { Phone, Mail, Facebook, Instagram, Youtube } from "lucide-react"
+import { Phone, Mail, Facebook, Instagram, Youtube, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useState } from "react"
 
 export function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
@@ -16,6 +19,7 @@ export function Header() {
         behavior: "smooth",
       })
     }
+    setIsMobileMenuOpen(false) // Close mobile menu after navigation
   }
 
   return (
@@ -26,11 +30,11 @@ export function Header() {
           <div className="flex items-center gap-6">
             <a href="tel:05549961028" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <Phone className="w-4 h-4" />
-              <span>0554 996 10 28</span>
+              <span className="hidden sm:inline">0554 996 10 28</span>
             </a>
             <a
               href="mailto:info@ocaklarnakliyat.com.tr"
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              className="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
               <Mail className="w-4 h-4" />
               <span>info@ocaklarnakliyat.com.tr</span>
@@ -84,8 +88,8 @@ export function Header() {
             </div>
           </div>
 
-          {/* Navigation menu */}
-          <nav className="flex items-center gap-8">
+          {/* Desktop Navigation menu */}
+          <nav className="hidden lg:flex items-center gap-8">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="text-gray-700 hover:text-[#e63946] transition-colors"
@@ -112,10 +116,10 @@ export function Header() {
             </button>
           </nav>
 
-          {/* Request form button */}
+          {/* Desktop Request form button */}
           <Button
             onClick={() => scrollToSection("teklif")}
-            className="bg-[#1d3557] hover:bg-[#1d3557]/90 text-white px-6"
+            className="hidden lg:flex bg-[#1d3557] hover:bg-[#1d3557]/90 text-white px-6"
           >
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -127,7 +131,64 @@ export function Header() {
             </svg>
             Talep Formu
           </Button>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 text-gray-700 hover:text-[#e63946] transition-colors"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden bg-white border-t border-gray-200">
+            <div className="container mx-auto px-4 py-4 space-y-4">
+              <button
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" })
+                  setIsMobileMenuOpen(false)
+                }}
+                className="block w-full text-left text-gray-700 hover:text-[#e63946] transition-colors py-2"
+              >
+                Anasayfa
+              </button>
+              <button
+                onClick={() => scrollToSection("hizmetlerimiz")}
+                className="block w-full text-left text-gray-700 hover:text-[#e63946] transition-colors py-2"
+              >
+                Hakkımızda
+              </button>
+              <button
+                onClick={() => scrollToSection("hizmetlerimiz")}
+                className="block w-full text-left text-gray-700 hover:text-[#e63946] transition-colors py-2"
+              >
+                Hizmetlerimiz
+              </button>
+              <button
+                onClick={() => scrollToSection("teklif")}
+                className="block w-full text-left text-gray-700 hover:text-[#e63946] transition-colors py-2"
+              >
+                İletişim
+              </button>
+              <Button
+                onClick={() => scrollToSection("teklif")}
+                className="w-full bg-[#1d3557] hover:bg-[#1d3557]/90 text-white mt-4"
+              >
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                  />
+                </svg>
+                Talep Formu
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   )

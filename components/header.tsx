@@ -28,9 +28,9 @@ export function Header() {
       <div className="bg-[#e63946] text-white py-2.5">
         <div className="container mx-auto px-4 flex items-center justify-between text-sm">
           <div className="flex items-center gap-6">
-            <a href="tel:05549961028" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <a href="tel:05384697401" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <Phone className="w-4 h-4" />
-              <span className="hidden sm:inline">0554 996 10 28</span>
+              <span className="hidden sm:inline">0538 469 74 01</span>
             </a>
             <a
               href="mailto:info@ocaklarnakliyat.com.tr"

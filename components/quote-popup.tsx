@@ -13,12 +13,12 @@ export function QuotePopup({ isOpen, onClose }: QuotePopupProps) {
   if (!isOpen) return null
 
   const handleCall = () => {
-    window.open("tel:05384697401", "_self")
+    window.open("tel:05304083028", "_self")
   }
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent("Merhaba, nakliyat hizmeti için fiyat almak istiyorum.")
-    window.open(`https://wa.me/905384697401?text=${message}`, "_blank")
+    window.open(`https://wa.me/905304083028?text=${message}`, "_blank")
   }
 
   const handleBackToForm = () => {

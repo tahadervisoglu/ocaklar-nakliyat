@@ -133,8 +133,8 @@ export function QuoteSection() {
             <div className="bg-white rounded-lg p-6 text-center shadow-sm">
               <Phone className="w-8 h-8 text-[#e63946] mx-auto mb-3" />
               <h3 className="font-bold text-[#1d3557] mb-2">Telefon</h3>
-              <a href="tel:05384697401" className="text-gray-600 hover:text-[#e63946]">
-                0538 469 74 01
+              <a href="tel:05304083028" className="text-gray-600 hover:text-[#e63946]">
+                0530 408 30 28
               </a>
             </div>
 

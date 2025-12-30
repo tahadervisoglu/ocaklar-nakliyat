@@ -7,7 +7,7 @@ export function WhatsAppFloat() {
 
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent("Merhaba, nakliyat hizmeti için bilgi almak istiyorum.")
-    window.open(`https://wa.me/905384697401?text=${message}`, "_blank")
+    window.open(`https://wa.me/905304083028?text=${message}`, "_blank")
   }
 
   return (

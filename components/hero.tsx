@@ -43,7 +43,7 @@ export function Hero() {
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
               <Button
-                onClick={() => window.open("tel:05384697401", "_self")}
+                onClick={() => window.open("tel:05304083028", "_self")}
                 className="bg-[#e63946] hover:bg-[#e63946]/90 text-white px-8 py-6 text-base rounded-full"
               >
                 Hemen Ara

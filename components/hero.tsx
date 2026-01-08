@@ -36,17 +36,10 @@ export function Hero() {
 
             <div className="flex flex-wrap gap-4 pt-2">
               <Button
-                onClick={() => scrollToSection("teklif")}
-                className="bg-[#1d3557] hover:bg-[#1d3557]/90 text-white px-8 py-6 text-base rounded-full"
-              >
-                Teklif Al
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-              <Button
                 onClick={() => window.open("tel:05304083028", "_self")}
-                className="bg-[#e63946] hover:bg-[#e63946]/90 text-white px-8 py-6 text-base rounded-full"
+                className="bg-[#1d3557] hover:bg-[#1d3557]/90 text-white px-12 py-6 text-lg rounded-full w-full sm:w-auto"
               >
-                Hemen Ara
+                HEMEN ARA: 0530 408 30 28
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </div>
